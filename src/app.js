@@ -52,7 +52,6 @@ app.get('/weather', (req, res) => {
             error: 'You must provide an address.'
         })
     }
-
     const address = req.query.address
     geocode(address, (error, {latitude, longitude, location} = {}) => {
         if (error) {
@@ -64,38 +63,15 @@ app.get('/weather', (req, res) => {
                 res.send({error})
                 return
             }
-
             const forecastReturn = {
                 location,
                 forecastData,
                 address
             }
             res.send(forecastReturn)
-
         })
-
     })
-
-
-    // res.send({
-    //     forecast: 'It\'s 79 degrees',
-    //     location: 'Denver',
-    //     address: req.query.address
-    // })
 })
-
-// app.get('/products', (req, res) => {
-//     if (!req.query.search) {
-//         return res.send({
-//             error: 'You must provide a search term'
-//         })
-//     }
-
-//     console.log(req.query.search)
-//     res.send({
-//         products: []
-//     })
-// })
 
 app.get('/help/*', (req, res) => {
     res.render('404', {
